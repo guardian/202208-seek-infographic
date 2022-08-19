@@ -1,0 +1,31 @@
+
+.attribution {
+
+    border-top: 1px dotted #dcdcdc;
+    border-bottom: 1px dotted #dcdcdc;
+    padding: 1rem 0;
+    margin: 1rem 1rem;
+    display: inline-block;
+    p {
+      margin-top: 0;
+      // color: #767676;
+    }
+
+    // a {
+    //   color: #767676;
+    // }
+
+    img {
+        width: 140px;
+        display: block;
+    }
+    // @include mq(tablet) {
+  
+    //   position: absolute;
+    //   top: 0;
+    //   left: 0;
+    //   padding: 5px 0 15px;
+    //   width: 15%;
+    //   margin-top: 0;
+    // }
+  }

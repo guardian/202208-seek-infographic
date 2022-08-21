@@ -33,12 +33,16 @@ const BubbleChart = ({data, onSelect, showChildren = false, id}) => {
       mobile: 5,
       desktop: 20,
     },
-    circleFill: '#4964E9'
+    circleFill: {
+      junior:'#4964E9',
+      middle:'#E60278',
+      senior:'#FF8946',
+    }[id]
   }
 
     useLayoutEffect(()=>{
         const root = am5.Root.new(chartEl.current);
-        console.log('bubble chart')
+        // console.log('bubble chart')
         
         // const dispatch = useDispatch();
 
@@ -161,25 +165,7 @@ const BubbleChart = ({data, onSelect, showChildren = false, id}) => {
     },[]);
 
     return (
-        <div className="chart-wrap">
-          <div className="padded">
-
-          
-            <div className="boxed">
-              <div className="content text-center">
-                <h2>Key drivers for junior and entry-level jobseekers by percentage </h2>
-
-              </div>
-            </div>
-            <div className="chart" ref={chartEl}></div>
-            <div className="boxed">
-              <div className="content text-center">
-                <a href="#" className="btn">Explore Seek's Laws of Attraction portal for more detail.</a>
-
-              </div>
-            </div>
-          </div>
-        </div>
+      <div className="chart" ref={chartEl}></div>
     )
 
 }

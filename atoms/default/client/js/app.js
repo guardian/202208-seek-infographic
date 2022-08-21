@@ -11,7 +11,7 @@ import {ScrollTrigger} from "gsap/ScrollTrigger";
 // import Brother from "./Brother";
 import store, { ACTION_SET_SECTIONS, fetchData } from "./store";
 import {SwitchTransition, Transition, TransitionGroup} from "react-transition-group";
-import { BubbleIcons, Logo, ScrollDown} from "./Icons";
+import { BubbleIcons, CloseIcon, Logo, ScrollDown} from "./Icons";
 import {Provider, useSelector, useDispatch} from "react-redux";
 import { useEffect, useRef, useState } from "preact/hooks";
 // import {SmoothProvider} from "react-smooth-scrolling";
@@ -151,7 +151,7 @@ const Footer = ({content, related, shareUrl}) => {
     return (
         <section className="footer">
             <div className="content">
-                <div className="break"><span /><span /><span /><span /></div>
+                {/* <div className="break"><span /><span /><span /><span /></div> */}
 
                 <div className="cta-wrap">
                     <div className="cta" {...setHtml(content.cta)} />
@@ -252,14 +252,18 @@ const MainBody = ({children}) => {
     )
 }
 
-const SectionHero = ({}) => {
+const SectionHero = ({id, title}) => {
 
     return (
-        <div className="section-hero">
+        <div className={`section-hero ${id}`}>
             <div className="vis">
-                <img src={`${assetsPath}/junior.jpg`} alt />
+                <div className="img">
+                    <img src={`${assetsPath}/${id}.jpg`} alt />
+                    <div className="overlay"></div>
+
+                </div>
                 <header>
-                    <h1>Lorem ipsum dolor sit amet.</h1>
+                    <h1>{title}</h1>
                 </header>
             </div>
         </div>
@@ -267,8 +271,12 @@ const SectionHero = ({}) => {
 }
 
 const Modal = ({children, onClose}) => {
+    const ref = useRef();
+    useEffect(()=>{
+        gsap.to(ref.current, {duration: 1, alpha: 1, ease: 'sine.out'})
+    },[]);
     return (
-        <div className="modal">
+        <div className="modal" ref={ref}>
             <div className="inner" onClick={onClose}>
                 <div className="body">
                     {children}
@@ -279,12 +287,16 @@ const Modal = ({children, onClose}) => {
 }
 
 const BubbleInfo = ({onClose, id, stat}) => {
+    const ref = useRef();
+    useEffect(()=>{
+        gsap.from(ref.current, {duration: .5, alpha: 0, scale: 0.8, delay: 0.3, ease: 'sine.out'})
+    },[]);
 
     const handeClose = () => {
         onClose();
     }
     return (
-        <div className={`bubble-info ${id}`}>
+        <div className={`bubble-info ${id}`} ref={ref}>
             <div className="info-inner">
                 <div className="icon">
                     {BubbleIcons[stat]()}
@@ -293,9 +305,207 @@ const BubbleInfo = ({onClose, id, stat}) => {
                     <h3>Lorem, ipsum dolor.</h3>
                     <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste repudiandae corporis iusto, optio quidem aperiam deserunt sint exercitationem molestias dolores atque explicabo mollitia rem id voluptas voluptatem quae aut ullam?</p>
                 </div>
-                <button className="btn-close" onClick={handeClose}>X</button>
+                <button className="btn-close" onClick={handeClose}><CloseIcon /></button>
             </div>
 
+        </div>
+    )
+}
+const Bubble = ({id, selected, data, label, index}) => {
+    const circRef = useRef();
+    // console.log('create bubble')
+    const [percent, setPercent] = useState(data[id][selected]);
+    useEffect(()=>{
+
+        gsap.to(circRef.current, {scale: data[id][selected]*.01, ease:'back.inOut', delay: .2 * (index - 1)});
+        function onUpdate() {
+            
+            setPercent((this.targets()[0].percent));
+        }
+        const pTo = data.values[id][selected];
+        gsap.to({percent:percent}, { 
+            percent: pTo,
+            onUpdate: onUpdate,
+            ease:'sine.inOut',
+            duration: 1.6,
+            delay: .4 * index
+        });
+
+    },[selected]);
+    return (
+        <div className={`bubble ${id}`}>
+            <div className="bubble-inner">
+                <div className="circ-wrap">
+                    <div className="circ" ref={circRef}>
+                        <svg width="100%" height="100%" viewBox="0 0 252 252" fill="none" >
+                            <circle  cx="126" cy="126" r="110" />
+                        </svg>
+                    </div>
+                    <div className="val"><p>{percent.toFixed(2)}%</p></div>
+
+                </div>
+                <p className="text-center lbl">{label}</p>
+            </div>
+        </div>
+    )
+}
+
+const VisMain = ({}) => {
+    const [selected, setSelected] = useState('sal');
+    const handleSelect = (id) => {
+        setSelected(id);
+        // console.log(id);
+    }
+    const data = {
+        "junior": {
+            'sal': 61.9,
+            'work': 94.82,
+            'dev': 100,
+            'culture': 72.07,
+            'loc': 100,
+            'sec': 100,
+            'env': 100,
+            'csr': 100,
+        },
+        "middle": {
+            'sal': 82.99,
+            'work': 100,
+            'dev': 67.53,
+            'culture': 78.21,
+            'loc': 97.89,
+            'sec': 100,
+            'env': 73.64,
+            'csr': 78.26,
+        },
+        "senior": {
+            'sal': 100,
+            'work': 86.06,
+            'dev': 64.94,
+            'culture': 100,
+            'loc': 63.16,
+            'sec': 88.24,
+            'env': 61.82,
+            'csr': 100,
+        },
+        values: {
+            "junior": {
+                'sal': 18.2,
+                'work': 23.8,
+                'dev': 15.4,
+                'culture': 12.9,
+                'loc': 9.5,
+                'sec': 6.8,
+                'env': 11,
+                'csr': 2.3,
+            },
+            "middle": {
+                'sal': 24.4,
+                'work': 25.1,
+                'dev': 10.4,
+                'culture': 14,
+                'loc': 9.3,
+                'sec': 6.8,
+                'env': 8.1,
+                'csr': 1.8,
+            },
+            "senior": {
+                'sal': 29.4,
+                'work': 21.6,
+                'dev': 10,
+                'culture': 17.9,
+                'loc': 6,
+                'sec': 6,
+                'env': 6.8,
+                'csr': 2.3,
+            },            
+        },
+        category: [
+            { key: 'sal', lbl: 'Salary'},
+            { key: 'work', lbl: 'Work-life balance'},
+            { key: 'dev', lbl: 'Development'},
+            { key: 'culture', lbl: 'Culture'},
+            { key: 'loc', lbl: 'Location'},
+            { key: 'sec', lbl: 'Security'},
+            { key: 'env', lbl: 'Work environment'},
+            { key: 'csr', lbl: 'CSR'},
+
+        ]
+    }
+
+    // console.log(JSON.stringify(data))
+
+    const content = useSelector(s=>s.content);
+    return (
+        <div className="vis-main"
+            style={{
+                backgroundImage: `linear-gradient(90deg, #aceadddd,#aceadddd), url('${assetsPath}/${selected}.jpg')`
+            }}
+        >
+            <div className="inner">
+                <div className="title" {...setHtml(content.chartTitle)}></div>
+                <div className="buttons">
+                    {data.category.map((v, i) =>
+                        <button 
+                            onClick={()=>handleSelect(v.key)}
+                            key={i}
+                            className={`${selected==v.key? 'active' : ''}`}
+                        >
+                            {v.lbl}
+                        </button>
+                        )}
+                    
+                </div>
+                <div className="vis-chart">
+                    <Bubble id="junior" label="Junior-level" selected={selected} data={data} index={1}/>
+                    <Bubble id="middle" label="Middle-level" selected={selected} data={data} index={2}/>
+                    <Bubble id="senior" label="Senior-level" selected={selected} data={data} index={3}/>
+                </div>
+
+                <div className="footnote">
+                    <p><small><em>The percentage of this seniority level who rated this driver highly. </em></small></p>
+                    <div className="ref">
+                        <a className="btn-ref-link" href="https://www.seek.com.au/loa" target="_blank">Explore <strong>Seek's Laws of Attraction portal</strong> for more detail.</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    )
+}
+
+const SubChart = ({id, title}) => {
+
+    const [modal, setModal] = useState(null);
+
+    const handleBubbleSelect = (id, key) => {
+        setModal({id, key});
+    }
+    
+    const handleClose = () => {
+        setModal(null);
+    }
+    return (
+        <div className="chart-wrap">
+          <div className="padded">
+
+          
+            <div className="boxed">
+              <div className="content text-center">
+                <h2 style={{
+                    color: `var(--${id})`
+                }}>{title} </h2>
+
+              </div>
+            </div>
+            <BubbleChart data={{...chartData[id]}} onSelect={handleBubbleSelect} id={id} />
+            <div className="boxed">
+                <div class="footnote">
+                    <div className="ref">
+                        <a className="btn-ref-link" href="https://www.seek.com.au/loa" target="_blank">Explore <strong>Seek's Laws of Attraction portal</strong> for more detail.</a>
+                    </div>
+                </div>
+            </div>
+          {modal !== null && <Modal onClose={handleClose} ><BubbleInfo onClose={handleClose} stat={modal.key} id={modal.id} /></Modal>}
+          </div>
         </div>
     )
 }
@@ -305,20 +515,13 @@ const Main = () => {
     
     const dispatch = useDispatch();
 
-    const [modal, setModal] = useState(null);
 
     useEffect(()=>{
-        dispatch( fetchData('https://interactive.guim.co.uk/docsdata/1Jd0rVSO-di-yFRTzWWF1dy3qCHvxQNd4XSuTf69ASx4.json') );
+        dispatch( fetchData('https://interactive.guim.co.uk/docsdata/1c-kdeill4S3qorqwSqRK_hdGZGPkbcOQ-qyt-to18_4.json') );
     },[]);
 
 
-    const handleBubbleSelect = (id, key) => {
-        setModal({id, key});
-    }
-    
-    const handleClose = () => {
-        setModal(null);
-    }
+
 
     const content = useSelector(s=>s.content);
 
@@ -352,46 +555,114 @@ const Main = () => {
                                         <Attribution content={content}/>
 
                                     </div>
-                                    <div>
+                                    <div className="sfw">
                                         <Standfirst content={content}></Standfirst>
-                                        <Intro content={content}></Intro>
+                                        {/* <Intro content={content}></Intro> */}
 
                                     </div>
                                 </div>
                             </Container>                        
 
                         </section>
+                        <section>
+                            <VisMain />
+                        </section>
+                        <section 
+                        className="padded-y"
+                        style={{
+                            paddingTop: '0'
+                        }}
+                        >
+                            <Container>
+                                <Boxed>
+                                    <div {...setHtml(content.intro)}></div>
+                                </Boxed>
+                            </Container>
+                        </section>
                         <section style={{
-                            '--panelBgColor': 'var(--bg-blue)'
-                        }}>
-                            <SectionHero>
+                            '--panelBgColor': "#4964E926"
+                        }}
+                        className="padded-y"
+                        >
+                            <SectionHero
+                            id="junior"
+                            title="Junior and Entry-Level Candidates"
+                            >
 
                             </SectionHero>
 
-                            <BubbleChart data={{...chartData.junior}} onSelect={handleBubbleSelect} id='junior' />
-                            {/* <BubbleChart data={{...chartData.middle}} onSelect={(id, k)=>console.log(id, k)} id='mid' />
-                            <BubbleChart data={{...chartData.senior}} onSelect={(id, k)=>console.log(id, k)} id='senior' /> */}
+ 
                             <Container>
                                 <Boxed>
-                                    <h2>Lorem ipsum dolor sit amet consectetur adipisicing elit. Doloremque, non!</h2>
-                                    <h3>Lorem ipsum dolor sit.</h3>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam debitis neque magnam ab enim! Nisi minus molestias, quam enim aliquid non et earum est odio eligendi, in cum, nesciunt vitae.</p>
-                                    <h3>Lorem ipsum dolor sit.</h3>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam debitis neque magnam ab enim! Nisi minus molestias, quam enim aliquid non et earum est odio eligendi, in cum, nesciunt vitae.</p>
-                                    <div className="quote">
-                                        <p>
-                                            <strong>Lorem ipsum dolor sit amet consectetur, adipisicing elit. Itaque expedita praesentium, natus, ipsam inventore labore hic ratione reprehenderit explicabo quam veniam dicta fuga, odit rem sequi error ullam quasi eos.</strong>
-                                        </p>
-                                    </div>
-                                    <h3>Lorem ipsum dolor sit.</h3>
-                                    <p>Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quibusdam debitis neque magnam ab enim! Nisi minus molestias, quam enim aliquid non et earum est odio eligendi, in cum, nesciunt vitae.</p>
+                                    <div {...setHtml(content.juniorCopy)}></div>
                                 </Boxed>
 
                             </Container>
-                        </section>      
+
+                            <SubChart id="junior" 
+                            title="Key drivers for junior and entry-level jobseekers by percentage"
+                            />
+
+                        </section>    
+
+
+
+                        <section style={{
+                            '--panelBgColor': "#E602780D"
+                        }}
+                        className="padded-y"
+                        >
+                            <SectionHero
+                            id="middle"
+                            title="Mid-Level Candidates"
+                            >
+
+                            </SectionHero>
+
+
+ 
+                            <Container>
+                                <Boxed>
+                                    <div {...setHtml(content.middleCopy)}></div>
+                                </Boxed>
+
+                            </Container>
+
+                            <SubChart id="middle" 
+                            title="Key drivers for mid-level jobseekers by percentage"
+                            />
+                        </section>    
+
+                        
+                        <section style={{
+                            '--panelBgColor': "#FF894626"
+                        }}
+                        className="padded-y"
+                        >
+                            <SectionHero
+                            id="senior"
+                            title="Senior-Level Candidates"
+                            >
+
+                            </SectionHero>
+
+
+ 
+                            <Container>
+                                <Boxed>
+                                    <div {...setHtml(content.seniorCopy)}></div>
+                                </Boxed>
+
+                            </Container>
+
+                            <SubChart id="senior" 
+                            title="Key drivers for senior level jobseekers by percentage"
+                            />
+                        </section>    
+                         
                         <Footer content={content} related={store.sheets.related} shareUrl={store.sheets.global[0].shareUrl} />
                         
-                        {modal !== null && <Modal onClose={handleClose} ><BubbleInfo onClose={handleClose} stat={modal.key} id={modal.id} /></Modal>}
+
                     </MainBody>
                     
                 }

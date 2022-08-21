@@ -4,6 +4,7 @@
   --dark-blue: #003575;
   --junior: #4964E9;
   --mid: #E60278;
+  --middle: #E60278;
   --senior: #FF8946;
   --bg-blue: rgba(73, 100, 233, 0.15);
 }
@@ -129,6 +130,17 @@ q {
   }
 }
 
+a {
+  color: currentColor;
+  font-size: 1rem;
+  font-weight: normal;
+  text-decoration: underline;
+}
+
+button {
+  font-family: "Display Sans", sans-serif;
+}
+
 .d-flex {
   display: flex;
   &.d-center {
@@ -157,7 +169,7 @@ q {
 
 .scroll-icon {
   text-align: center;
-  margin: 2rem 0 0;
+  margin: 2rem 0;
   fill: white;
   stroke: white;
 }
@@ -245,7 +257,10 @@ header.with-logo {
   // height: 300px;
 }
 
-
+.sfw {
+  display: flex;
+  align-items: center;
+}
 
 section {
   --panelBgColor: transparent;
@@ -276,6 +291,17 @@ section {
 
       }
     }
+
+  }
+  &.padded-y {
+    padding-top: 4rem;
+    padding-bottom: 4rem;
+    .content {
+      padding-bottom: 0;
+    }
+  }
+  .content p:last-child {
+    margin-bottom: 0;
   }
 
   @include mq(desktop) {
@@ -495,8 +521,9 @@ $stand-first-color: transparent;
 }
 
 section.footer {
-  background-color: $stand-first-color;
-
+  padding-top: 4rem;
+  background-color: var(--dark-blue);
+  
   .disc p {
     font-size: 10/16 + rem;
     font-style: italic;
@@ -517,7 +544,7 @@ section.footer {
     .cta {
       p, a {
         font-size: 18/16 + rem;
-
+        color: white;
       }
     }
   }
@@ -625,7 +652,8 @@ section.footer {
 }
 
 .chart-wrap { 
-  margin: 2rem 0;
+  margin: 2rem 0 0;
+  position: relative;
   &::before {
     content: "";
     display: block;
@@ -643,6 +671,7 @@ section.footer {
     margin: auto;
   }
   .padded {
+    position: relative;
     padding: 2rem 0;
   }
 }
@@ -665,6 +694,10 @@ section.footer {
     &>div {
       overflow: hidden !important;
     }
+  }
+
+  canvas:nth-child(2) {
+    display: none;
   }
 }
 p+h3, h2+h3 {
@@ -689,9 +722,21 @@ h3+p {
   .vis {
     max-width: 58rem;
     margin: auto;
+    .img {
+      position: relative;
+    }
     img {
       width: 100%;
+      display: block;
     }
+  }
+  .overlay  {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: linear-gradient(0deg, #0000009c, transparent 50%);
+    top: 0;
+    left: 0;
   }
   header  {
     position: absolute;
@@ -711,18 +756,32 @@ h3+p {
       width: 120px;
       height: 10px;
       background-color: var(--borderColor, #4964E9);
-
+      @include mq($until: tablet) {
+        margin: auto;
+        
+      }
     }
+  }
+
+  &.junior h1::before {
+    --borderColor: var(--junior)
+  }
+  &.middle h1::before {
+    --borderColor: var(--mid)
+  }
+  &.senior h1::before {
+    --borderColor: var(--senior)
   }
 }
 
 .modal {
-  position: fixed;
-  width: 100vw;
-  height: 100vh;
+  position: absolute;
+  width: 100%;
+  height: 100%;
   top: 0;
   left: 0;
   background-color: #000C;
+  opacity: 0;
   >.inner {
     padding: 2rem;
     width: 100%;
@@ -768,4 +827,136 @@ h3+p {
       fill: var(--senior);
     }
   }
+}
+
+.vis-main {
+  background-color: #aceadd;
+  background-size: cover;
+  transition: all 1s;
+  margin: 2rem 0;
+  
+  &::before,
+  &::after {
+    content: "";
+    display: block;
+    background: var(--dark-blue);
+    width: 90%;
+    max-width: 38rem;
+    margin: auto;
+    height: 5px;
+  }
+  &>.inner {
+    padding: 2rem 0;
+    >.title {
+      text-align: center;
+    }
+  }
+  .buttons {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    max-width: 38rem;
+    margin: auto;
+    button {
+      margin: 0.5rem;
+      background-color: #EEEEEE;
+      border: 1px solid var(--dark-blue);
+      border-radius: 10px;
+      padding: 0.5rem 1rem;
+
+      cursor: pointer;
+      &.active, &:focus {
+        background-color: var(--dark-blue);
+        color: white;
+      }
+    }
+  }
+  .vis-chart {
+    display: flex;
+    justify-content: center;
+    max-width: 58rem;
+    margin: auto;
+  }
+  .bubble {
+    .circ-wrap  {
+      position: relative;
+    }
+    .val {
+      position: absolute;
+      height: 100%;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      top: 0;
+      left: 0;
+      p {
+        color: white;
+        font-weight: 700;
+        @include mq(tablet) {
+          font-size: 150%;
+          
+        }
+      }
+    }
+    circle {
+      transform-origin: 126px;
+    }
+    .lbl {
+      font-size: 1.25rem;
+      &::before {
+        content: "";
+        display: block;
+        width: 50px;
+        height: 10px;
+        margin: auto;
+        margin-bottom: 12px;
+      }
+    }
+    &.junior {
+      circle {
+
+        fill: var(--junior);
+      }
+      .lbl::before {
+        background-color: var(--junior);
+      }
+    }
+    &.middle {
+      circle {
+        fill: var(--mid);
+
+      }
+      .lbl::before {
+        background-color: var(--mid);
+      }
+    }
+    &.senior {
+      circle {
+        fill: var(--senior);
+
+      }
+      .lbl::before {
+        background-color: var(--senior);
+      }
+    }
+  }
+}
+
+.footnote {
+  padding: 2rem;
+  text-align: center;
+  .btn-ref-link {
+    padding: 0.5rem 0.8rem;
+    background-color: rgba(13, 56, 128, 0.15);
+    border: 1px solid rgba(13, 56, 128, 1);
+    border-radius: 40px;
+    font-size: 0.625rem;
+    text-decoration: none;
+  }
+}
+
+.sf {
+  padding-top: 2rem;
+  font-size: 1.25rem;
 }

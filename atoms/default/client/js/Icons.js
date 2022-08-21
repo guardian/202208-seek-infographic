@@ -288,6 +288,16 @@ export const WorkIcon = () => {
         </div>
     )    
 }
+export const CloseIcon = () => {
+    return (
+        <i className="">
+<svg width="14" height="14" viewBox="0 0 14 14" fill="none" >
+<path d="M2.57996 13.504L6.68996 9.424L10.8 13.504L13.17 11.134L9.05996 7.054L13.17 2.974L10.8 0.604004L6.68996 4.714L2.57996 0.604004L0.209961 2.974L4.28996 7.054L0.209961 11.134L2.57996 13.504Z" fill="#060257"/>
+</svg>
+
+        </i>
+    )    
+}
 
 export const BubbleIcons = {
 	'sal': SalIcon,

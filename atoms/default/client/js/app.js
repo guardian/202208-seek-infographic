@@ -253,9 +253,28 @@ const MainBody = ({children}) => {
 }
 
 const SectionHero = ({id, title}) => {
+    const ref = useRef();
+    useEffect(()=>{
+        const img = ref.current.querySelector('.vis img');
+        // console.log(img)
+        setTimeout(()=>{
 
+            gsap.from(img, {
+                scrollTrigger: {
+                    trigger: ref.current.querySelector('.img'),
+                    scrub: true,
+                    start: 'top bottom',
+                    end: 'top 5%',
+                    markers: true
+                },
+                scale: 1.2, 
+                y: 100,
+                ease: 'sine.out'
+            })
+        },300)
+    },[]);
     return (
-        <div className={`section-hero ${id}`}>
+        <div className={`section-hero ${id}`} ref={ref}>
             <div className="vis">
                 <div className="img">
                     <img src={`${assetsPath}/${id}.jpg`} alt />

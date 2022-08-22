@@ -229,7 +229,7 @@ const SmoothScroll = ({children}) => {
 
 
 const MainBody = ({children}) => {
-    const mainRef = useRef();
+    const ref = useRef();
 
     // useEffect(()=>{
     //     const resize = () => {
@@ -245,8 +245,32 @@ const MainBody = ({children}) => {
     //     return () => window.removeEventListener('resize', resize);
     // },[]);
 
+    useEffect(()=>{
+
+        const t = Array.from(ref.current.querySelectorAll('section.padded-y p, section.padded-y h3'));
+
+        const tid = setTimeout(()=> {
+            t.map(v=>{
+                // console.log(v)
+        gsap.from(v, {
+            y: 30,
+            alpha: .3,
+            // scrollTrigger: v
+            duration: 1,
+            scrollTrigger: {
+                trigger: v,
+                // scrub: true,
+                // start: 'top bottom',
+                end: 'top 50%',
+                toggleActions: "restart none none none"
+            }
+        })})}, 200);
+
+        return ()=>clearTimeout(tid);
+    },[]);
+
     return (
-        <div className="main" ref={mainRef}>
+        <div className="main" ref={ref}>
             {children}
         </div>
     )
@@ -265,7 +289,6 @@ const SectionHero = ({id, title}) => {
                     scrub: true,
                     start: 'top bottom',
                     end: 'top 5%',
-                    markers: true
                 },
                 scale: 1.2, 
                 y: 100,

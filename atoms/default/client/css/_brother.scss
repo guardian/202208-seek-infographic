@@ -97,7 +97,7 @@ h1, h2 {
   // text-decoration: underline;
   // text-transform: uppercase;
   font-family: "Display Sans", sans-serif;
-  font-weight: 400;
+  font-weight: 350;
   
   span {
     font-weight: 700;
@@ -211,6 +211,7 @@ header.with-logo {
     // margin-left: 10%;
     padding: 2rem;
     max-width: 40rem;
+    text-align: center;
     p {
       padding-bottom: 2rem;
       padding-right: 2rem;
@@ -687,6 +688,7 @@ section.footer {
     color: white;
     strong  {
       font-size: 150%;
+      font-weight: 350;
     }
   }
   &>div:nth-child(1) > div:nth-child(2) {
@@ -735,18 +737,26 @@ h3+p {
     position: absolute;
     width: 100%;
     height: 100%;
-    background-image: linear-gradient(0deg, #0000009c, transparent 50%);
+    
+    background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 40%, #000000 100%);
+    @include mq(tablet) {
+      background-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 72.94%, #000000 100%);
+
+    }
     top: 0;
     left: 0;
   }
   header  {
     position: absolute;
-    bottom: 2rem;
     left: 0;
     width: 100%;
     display: flex;
     justify-content: center;
     color: white;
+    bottom: 0;
+    @include mq(tablet) {
+      bottom: 2rem;
+    }
   }
   h1 {
     text-align: center;
@@ -856,7 +866,7 @@ h3+p {
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
-    max-width: 38rem;
+    max-width: 44rem;
     margin: auto;
     button {
       margin: 0.5rem;
@@ -952,8 +962,11 @@ h3+p {
     background-color: rgba(13, 56, 128, 0.15);
     border: 1px solid rgba(13, 56, 128, 1);
     border-radius: 40px;
-    font-size: 0.625rem;
+    font-size: 1rem;
     text-decoration: none;
+    display: block;
+    max-width: 30rem;
+    margin: auto;
   }
 }
 

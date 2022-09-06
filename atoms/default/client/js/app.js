@@ -247,24 +247,43 @@ const MainBody = ({children}) => {
 
     useEffect(()=>{
 
-        const t = Array.from(ref.current.querySelectorAll('section.padded-y p, section.padded-y h3'));
+        const t = Array.from(ref.current.querySelectorAll('section.padded-y h2'));
+        // const t2 = Array.from(ref.current.querySelectorAll('div>canvas:first-child'));
 
         const tid = setTimeout(()=> {
             t.map(v=>{
                 // console.log(v)
-        gsap.from(v, {
-            y: 30,
-            alpha: .3,
-            // scrollTrigger: v
-            duration: 1,
-            scrollTrigger: {
-                trigger: v,
-                // scrub: true,
-                // start: 'top bottom',
-                end: 'top 50%',
-                toggleActions: "restart none none none"
-            }
-        })})}, 200);
+                gsap.from(v, {
+                    y: 30,
+                    alpha: .3,
+                    // scrollTrigger: v
+                    duration: 1,
+                    scrollTrigger: {
+                        trigger: v,
+                        // scrub: true,
+                        // start: 'top bottom',
+                        end: 'top 50%',
+                        toggleActions: "restart none none none"
+                    }
+                })});
+
+        //     t2.map(v=>{
+        //                 // console.log(v)
+        //         gsap.from(v, {
+        //             scale: 1.2,
+        //             // alpha: .3,
+        //             transformOrigin: '50%',
+        //             // scrollTrigger: v
+        //             duration: 1,
+        //             scrollTrigger: {
+        //                 trigger: v,
+        //                 // scrub: true,
+        //                 // start: 'top bottom',
+        //                 end: 'top 50%',
+        //                 toggleActions: "restart none none none"
+        //             }
+        // })})
+        }, 200);
 
         return ()=>clearTimeout(tid);
     },[]);
@@ -337,15 +356,17 @@ const BubbleInfo = ({onClose, id, stat}) => {
     const handeClose = () => {
         onClose();
     }
+    const content = useSelector(s=>s.content);
+
     return (
-        <div className={`bubble-info ${id}`} ref={ref}>
+        <div className={`bubble-info ${id} ${stat}`} ref={ref}>
             <div className="info-inner">
                 <div className="icon">
                     {BubbleIcons[stat]()}
                 </div>
                 <div className="body">
-                    <h3>Lorem, ipsum dolor.</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Iste repudiandae corporis iusto, optio quidem aperiam deserunt sint exercitationem molestias dolores atque explicabo mollitia rem id voluptas voluptatem quae aut ullam?</p>
+                    <h3>{content.driverLabels[stat]}</h3>
+                    <p {...setHtml(content[id][stat])}></p>
                 </div>
                 <button className="btn-close" onClick={handeClose}><CloseIcon /></button>
             </div>
@@ -403,73 +424,80 @@ const VisMain = ({}) => {
             'sal': 61.9,
             'work': 94.82,
             'dev': 100,
-            'culture': 72.07,
+            'manage': 77.5,
+            'cul': 67.68,
             'loc': 100,
             'sec': 100,
             'env': 100,
-            'csr': 100,
+            'cowork': 100,
         },
         "middle": {
             'sal': 82.99,
             'work': 100,
             'dev': 67.53,
-            'culture': 78.21,
+            'manage': 80,
+            'cul': 76.77,
             'loc': 97.89,
             'sec': 100,
             'env': 73.64,
-            'csr': 78.26,
+            'cowork': 73.64,
         },
         "senior": {
             'sal': 100,
             'work': 86.06,
             'dev': 64.94,
-            'culture': 100,
+            'manage': 100,
+            'cul': 100,
             'loc': 63.16,
             'sec': 88.24,
             'env': 61.82,
-            'csr': 100,
+            'cowork': 61.82,
         },
         values: {
             "junior": {
                 'sal': 18.2,
                 'work': 23.8,
                 'dev': 15.4,
-                'culture': 12.9,
+                'manage': 6.2,
+                'cul': 6.7,
                 'loc': 9.5,
                 'sec': 6.8,
                 'env': 11,
-                'csr': 2.3,
+                'cowork': 3.1,
             },
             "middle": {
                 'sal': 24.4,
                 'work': 25.1,
                 'dev': 10.4,
-                'culture': 14,
+                'manage': 6.4,
+                'cul': 7.6,
                 'loc': 9.3,
                 'sec': 6.8,
                 'env': 8.1,
-                'csr': 1.8,
+                'cowork': 2.6,
             },
             "senior": {
                 'sal': 29.4,
                 'work': 21.6,
                 'dev': 10,
-                'culture': 17.9,
+                'manage': 8,
+                'cul': 9.9,
                 'loc': 6,
                 'sec': 6,
                 'env': 6.8,
-                'csr': 2.3,
+                'cowork': 2.2,
             },            
         },
         category: [
             { key: 'sal', lbl: 'Salary'},
             { key: 'work', lbl: 'Work-life balance'},
             { key: 'dev', lbl: 'Development'},
-            { key: 'culture', lbl: 'Culture'},
+            { key: 'manage', lbl: 'Management'},
+            { key: 'cul', lbl: 'Culture'},
             { key: 'loc', lbl: 'Location'},
-            { key: 'sec', lbl: 'Security'},
+            { key: 'sec', lbl: 'Job security'},
             { key: 'env', lbl: 'Work environment'},
-            { key: 'csr', lbl: 'CSR'},
+            { key: 'cowork', lbl: 'Co-workers'},
 
         ]
     }
@@ -479,9 +507,9 @@ const VisMain = ({}) => {
     const content = useSelector(s=>s.content);
     return (
         <div className="vis-main"
-            style={{
-                backgroundImage: `linear-gradient(90deg, #aceadddd,#aceadddd), url('${assetsPath}/${selected}.jpg')`
-            }}
+            // style={{
+            //     backgroundImage: `linear-gradient(90deg, #aceadddd,#aceadddd), url('${assetsPath}/${selected}.jpg')`
+            // }}
         >
             <div className="inner">
                 <div className="title" {...setHtml(content.chartTitle)}></div>
@@ -499,7 +527,7 @@ const VisMain = ({}) => {
                 </div>
                 <div className="vis-chart">
                     <Bubble id="junior" label="Junior-level" selected={selected} data={data} index={1}/>
-                    <Bubble id="middle" label="Middle-level" selected={selected} data={data} index={2}/>
+                    <Bubble id="middle" label="Mid-level" selected={selected} data={data} index={2}/>
                     <Bubble id="senior" label="Senior-level" selected={selected} data={data} index={3}/>
                 </div>
 

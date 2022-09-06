@@ -37,6 +37,19 @@ const rootReducer = (state = initialState, action) => {
                 content[v.key] = v.content;
             })
             
+            content.junior = {};
+            action.payload.junior.forEach(v => {
+                content.junior[v.key] = v.content;
+            })
+            content.middle = {};
+            action.payload.middle.forEach(v => {
+                content.middle[v.key] = v.content;
+            })
+            content.senior = {};
+            action.payload.senior.forEach(v => {
+                content.senior[v.key] = v.content;
+            })
+            content.driverLabels = JSON.parse(content.driverLabels);
             return {...state, sheets: action.payload, content: content };
             // return {...state, sheets: action.payload };
 

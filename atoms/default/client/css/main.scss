@@ -1,13 +1,35 @@
+:root {
+    --primary-color: #0D3880;
+    --grey: #f5f5f5;
+    --dark-blue: #003575;
+    --junior: #4964E9;
+    --mid: #E60278;
+    --middle: #E60278;
+    --senior: #FF8946;
+    --bg-blue: rgba(73, 100, 233, 0.15);
+  }
+  
+  * {
+    box-sizing: border-box;
+  }
+  figure.element {
+    margin-top: 0 !important;
+  }
 @import "fonts";
 @import "mq";
 @import "palette";
 @import "app";
 @import "common";
-@import "attribution";
-@import "header";
-@import "brother";
-@import "audioPlayer";
 
+#Glabs {
+    background-color: #E7F2F0;
+    color: var(--primary-color);    
+    @import "attribution";
+    @import "header";
+    @import "brother";
+    @import "audioPlayer";
+
+}
 // @import "enhancer";
 
 .interactive-atom {

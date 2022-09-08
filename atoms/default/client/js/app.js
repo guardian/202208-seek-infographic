@@ -407,7 +407,7 @@ const Bubble = ({id, selected, data, label, index}) => {
                     <div className="val"><p>{percent.toFixed(2)}%</p></div>
 
                 </div>
-                <p className="text-center lbl">{label}</p>
+                <p className="text-center lbl"><strong>{label}</strong></p>
             </div>
         </div>
     )
@@ -502,15 +502,30 @@ const VisMain = ({}) => {
         ]
     }
 
+    const bgRef = useRef();
+
     // console.log(JSON.stringify(data))
 
     const content = useSelector(s=>s.content);
+
+
+    useEffect(()=>{
+        gsap.to(bgRef.current, {alpha:0, onComplete:()=>{
+            bgRef.current.style.backgroundImage = `linear-gradient(90deg, #aceadddd,#aceadddd), url('${assetsPath}/${selected}.jpg')`;
+            gsap.to(bgRef.current, {alpha: 1, delay: 1});
+        }})
+    },[selected])
+
     return (
         <div className="vis-main"
             // style={{
             //     backgroundImage: `linear-gradient(90deg, #aceadddd,#aceadddd), url('${assetsPath}/${selected}.jpg')`
             // }}
+            
         >
+            <div className="bg" >
+                <div className="pic" ref={bgRef}></div>
+            </div>
             <div className="inner">
                 <div className="title" {...setHtml(content.chartTitle)}></div>
                 <div className="buttons">
@@ -554,7 +569,7 @@ const SubChart = ({id, title}) => {
         setModal(null);
     }
     return (
-        <div className="chart-wrap">
+        <div className={`chart-wrap ${id}`}>
           <div className="padded">
 
           

@@ -98,7 +98,7 @@ const BubbleChart = ({data, onSelect, showChildren = false, id}) => {
             fontFamily: "Display Sans",
             fontSize: config.fontSize[screenType()],
             // breakWords: true,
-            html:"<p class='bubble-node' style='text-align:center;'><strong>{value}</strong><br>{name}</p>"
+            html:"<p class='bubble-node' style='text-align:center;'><strong>{value}%</strong><br>{name}</p>"
           });          
         //   series.tooltip.template.forceHidden = (true);
         // https://www.amcharts.com/demos/force-directed-adding-links/

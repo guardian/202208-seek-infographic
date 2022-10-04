@@ -48,7 +48,7 @@ const data =  {
         },
         {
           name: "Work environment",
-          id: 'work',
+          id: 'env',
           value: 7.8,
           children: [
             {
@@ -164,7 +164,7 @@ const data =  {
         },
         {
           name: "Work environment",
-          id: 'work',
+          id: 'env',
           value: 7.6,
           children: [
             {
@@ -280,7 +280,7 @@ const data =  {
         },
         {
           name: "Work environment",
-          id: 'work',
+          id: 'env',
           value: 8.0,
           children: [
             {

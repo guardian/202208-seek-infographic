@@ -404,7 +404,7 @@ const Bubble = ({id, selected, data, label, index}) => {
                             <circle  cx="126" cy="126" r="110" />
                         </svg>
                     </div>
-                    <div className="val"><p>{percent.toFixed(2)}%</p></div>
+                    <div className="val"><p>{percent.toFixed(1)}%</p></div>
 
                 </div>
                 <p className="text-center lbl"><strong>{label}</strong></p>
@@ -741,7 +741,7 @@ const Main = () => {
                             </Container>
 
                             <SubChart id="senior" 
-                            title="Key drivers for senior level jobseekers by percentage"
+                            title="Key drivers for senior-level jobseekers by percentage"
                             />
                         </section>    
                          

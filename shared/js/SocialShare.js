@@ -26,7 +26,7 @@ export default class SocialShare extends Component {
                 <FacebookShare url={shareUrl} size={iconSize} circle />
             </li>
             <li>
-                <TwitterShare url={shareUrl} text={title} size={iconSize} circle />
+                <TwitterShare url={shareUrl} text={`${title} @seekjobs`} size={iconSize} circle />
             </li>
             <li>
                 <EmailShare url={shareUrl} text={title} size={iconSize} circle />

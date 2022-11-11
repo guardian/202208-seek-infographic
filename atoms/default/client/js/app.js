@@ -439,8 +439,8 @@ const VisMain = ({}) => {
             'cul': 76.77,
             'loc': 97.89,
             'sec': 100,
-            'env': 73.64,
-            'cowork': 73.64,
+            'env': 70.51,
+            'cowork': 83.87,
         },
         "senior": {
             'sal': 100,
@@ -450,8 +450,8 @@ const VisMain = ({}) => {
             'cul': 100,
             'loc': 63.16,
             'sec': 88.24,
-            'env': 61.82,
-            'cowork': 61.82,
+            'env': 57.69,
+            'cowork': 70.97,
         },
         values: {
             "junior": {
@@ -462,7 +462,7 @@ const VisMain = ({}) => {
                 'cul': 6.7,
                 'loc': 9.5,
                 'sec': 6.8,
-                'env': 11,
+                'env': 7.8,
                 'cowork': 3.1,
             },
             "middle": {
@@ -473,7 +473,7 @@ const VisMain = ({}) => {
                 'cul': 7.6,
                 'loc': 9.3,
                 'sec': 6.8,
-                'env': 8.1,
+                'env': 5.5,
                 'cowork': 2.6,
             },
             "senior": {
@@ -484,7 +484,7 @@ const VisMain = ({}) => {
                 'cul': 9.9,
                 'loc': 6,
                 'sec': 6,
-                'env': 6.8,
+                'env': 4.5,
                 'cowork': 2.2,
             },            
         },
@@ -547,9 +547,9 @@ const VisMain = ({}) => {
                 </div>
 
                 <div className="footnote">
-                    <p><small><em>The percentage of this seniority level who rated this driver highly. </em></small></p>
+                    <p><small><em>{content.footnote1} </em></small></p>
                     <div className="ref">
-                        <a className="btn-ref-link" href="https://www.seek.com.au/loa" target="_blank">Explore <strong>Seek's Laws of Attraction portal</strong> for more detail.</a>
+                        <a className="btn-ref-link" href="https://www.seek.com.au/loa?tracking=PSH-TGAIART-TheGuardianPartnerCampaign_Premium_Native-31628&utm_campaign=TheGuardianPartnerCampaign_Premium_Native&utm_source=TheGuardian&utm_medium=Link&utm_content=TheGuardianPartnerCampaign_Premium_Native_Data_VIS" target="_blank">Explore <strong>Seek's Laws of Attraction portal</strong> for more detail.</a>
                     </div>
                 </div>
             </div>
@@ -585,7 +585,7 @@ const SubChart = ({id, title}) => {
             <div className="boxed">
                 <div class="footnote">
                     <div className="ref">
-                        <a className="btn-ref-link" href="https://www.seek.com.au/loa" target="_blank">Explore <strong>Seek's Laws of Attraction portal</strong> for more detail.</a>
+                        <a className="btn-ref-link" href="https://www.seek.com.au/loa?tracking=PSH-TGAIART-TheGuardianPartnerCampaign_Premium_Native-31628&utm_campaign=TheGuardianPartnerCampaign_Premium_Native&utm_source=TheGuardian&utm_medium=Link&utm_content=TheGuardianPartnerCampaign_Premium_Native_Data_VIS" target="_blank">Explore <strong>Seek's Laws of Attraction portal</strong> for more detail.</a>
                     </div>
                 </div>
             </div>
@@ -685,7 +685,7 @@ const Main = () => {
                             </Container>
 
                             <SubChart id="junior" 
-                            title="Key drivers for junior and entry-level jobseekers by percentage"
+                            title="What junior and entry-level jobseekers consider important"
                             />
 
                         </section>    
@@ -714,7 +714,7 @@ const Main = () => {
                             </Container>
 
                             <SubChart id="middle" 
-                            title="Key drivers for mid-level jobseekers by percentage"
+                            title="What mid-level jobseekers consider important"
                             />
                         </section>    
 
@@ -741,7 +741,7 @@ const Main = () => {
                             </Container>
 
                             <SubChart id="senior" 
-                            title="Key drivers for senior-level jobseekers by percentage"
+                            title="What senior-level jobseekers consider important"
                             />
                         </section>    
                          

@@ -102,7 +102,7 @@ const data =  {
           ]        
         },      
         {
-          name: "Company",
+          name: "Company & CSR",
           id: 'company',
           value: 2.4,
           children: [
@@ -218,7 +218,7 @@ const data =  {
           ]        
         },      
         {
-          name: "Company",
+          name: "Company & CSR",
           id: 'company',
           value: 1.90,
           children: [
@@ -334,7 +334,7 @@ const data =  {
           ]        
         },      
         {
-          name: "Company",
+          name: "Company & CSR",
           id: 'company',
           value: 2.4,
           children: [

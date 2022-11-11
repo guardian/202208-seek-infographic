@@ -516,7 +516,7 @@ $stand-first-color: transparent;
 
 section.footer {
   padding-top: 4rem;
-  background-color: var(--dark-blue);
+  background-color: #E7F2F0;
   
   .disc p {
     font-size: 10/16 + rem;
@@ -538,7 +538,8 @@ section.footer {
     .cta {
       p, a {
         font-size: 18/16 + rem;
-        color: white;
+        color: #0D3880;
+        font-weight: 400;
       }
     }
   }

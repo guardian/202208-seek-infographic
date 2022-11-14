@@ -577,7 +577,7 @@ const SubChart = ({id, title}) => {
               <div className="content text-center">
                 <h2 style={{
                     color: `var(--${id})`
-                }}>{title} </h2>
+                }} {...setHtml(title)}></h2>
 
               </div>
             </div>
@@ -685,7 +685,7 @@ const Main = () => {
                             </Container>
 
                             <SubChart id="junior" 
-                            title="What junior and entry-level jobseekers consider important"
+                            title={content.juniorChartTitle}
                             />
 
                         </section>    
@@ -714,7 +714,7 @@ const Main = () => {
                             </Container>
 
                             <SubChart id="middle" 
-                            title="What mid-level jobseekers consider important"
+                            title={content.middleChartTitle}
                             />
                         </section>    
 
@@ -741,7 +741,7 @@ const Main = () => {
                             </Container>
 
                             <SubChart id="senior" 
-                            title="What senior-level jobseekers consider important"
+                            title={content.seniorChartTitle}
                             />
                         </section>    
                          

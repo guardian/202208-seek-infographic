@@ -161,7 +161,7 @@ const Footer = ({content, related, shareUrl}) => {
                 
 
                 <div className="share">
-                    <SocialBar title={content.shareTitle} url={shareUrl} />
+                    <SocialBar title={content.shareTitle} url={shareUrl} twitter={content.twitterShare} />
                 </div>
                 <div className="related">
                     <RelatedContent cards={related} />

@@ -165,7 +165,7 @@ const data =  {
         {
           name: "Work environment",
           id: 'env',
-          value: 7.6,
+          value: 5.5,
           children: [
             {
               name: "child label",
@@ -187,7 +187,7 @@ const data =  {
         {
           name: "Culture",
           id: 'cul',
-          value: 6.4,
+          value: 7.6,
           children: [
             {
               name: "child label",
@@ -198,7 +198,7 @@ const data =  {
         {
           name: "Management",
           id: 'manage',
-          value: 5.5,
+          value: 6.4,
           children: [
             {
               name: "child label",
@@ -237,7 +237,7 @@ const data =  {
       {
         name: "Work-life balance",
         id: 'work',
-        value: 29.4,
+        value: 21.6,
         children: [
           {
             name: "child label",
@@ -248,7 +248,7 @@ const data =  {
       {
           name: "Salary",
           id: 'sal',
-          value: 21.6,
+          value: 29.4,
           children: [
             {
               name: "child label",
@@ -270,7 +270,7 @@ const data =  {
         {
           name: "Location",
           id: 'loc',
-          value: 9.9,
+          value: 6.0,
           children: [
             {
               name: "child label",
@@ -281,7 +281,7 @@ const data =  {
         {
           name: "Work environment",
           id: 'env',
-          value: 8.0,
+          value: 4.5,
           children: [
             {
               name: "child label",
@@ -303,7 +303,7 @@ const data =  {
         {
           name: "Culture",
           id: 'cul',
-          value: 6.0,
+          value: 9.9,
           children: [
             {
               name: "child label",
@@ -314,7 +314,7 @@ const data =  {
         {
           name: "Management",
           id: 'manage',
-          value: 4.5,
+          value: 8.0,
           children: [
             {
               name: "child label",

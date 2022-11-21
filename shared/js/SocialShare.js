@@ -1,7 +1,7 @@
 import { Component, render, h } from "preact";
 import { TwitterShare, FacebookShare, EmailShare, LinkedinShare, PinterestShare } from "preact-social";
 
-let shareUrl=null, title=null, iconSize=24;
+let shareUrl=null, title=null, iconSize=24,twitterTitle=null;
 export default class SocialShare extends Component {
     constructor(props){
         super(props);
@@ -9,6 +9,7 @@ export default class SocialShare extends Component {
         iconSize = this.props.iconSize || iconSize;
         console.log('SocialBar mount', shareUrl);
         title = this.props.title || '';
+        twitterTitle = this.props.twitter || title;
 
     }
 

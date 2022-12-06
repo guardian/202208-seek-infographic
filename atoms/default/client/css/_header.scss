@@ -57,7 +57,7 @@
       max-width: 44rem;
       text-align: center;
       @include mq(desktop) {
-        margin-top: 0;
+        margin-top: -2rem;
       }
 
     }
@@ -102,13 +102,17 @@
     }
 
     .client-tab {
-      background-color: #005689;
+      background-color: white;
       display: inline-block;
       padding: .25rem 1rem;
+      margin-top: -1rem;
+      margin-bottom: 1rem;
       a {
-        color: #fff;
+        color: var(--primary-color);
         font-family:  "Display Sans", serif;
-
+        font-size: 18/16 + rem;
+        font-weight: 600;
+        text-decoration: none;
       }
     }
     .main-title {

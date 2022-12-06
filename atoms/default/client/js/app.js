@@ -124,6 +124,9 @@ const Header = () => {
             </div>
             <div>
                     <div class="title">
+                            <div className="client-tab">
+                                <a href={content.clientTabLink} {...setHtml(content.clientTab)}>Lorem ipsum</a>
+                            </div>
                             <h1 className="text-bg" {...setHtml(content.headline)}></h1>
                             <div className="subhead" {...setHtml(content.subhead)}></div>
                             <ScrollDown />

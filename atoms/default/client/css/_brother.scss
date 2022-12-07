@@ -97,11 +97,13 @@ h1 {
 h2 {
   font-weight: 700;
   font-size: 150%;
+  font-weight: 700;
 }
 
 h3, h4 {
   font-family: "Display Sans", sans-serif;
   font-size: 100%;
+  font-weight: 700;
 }
 
 q {
@@ -122,6 +124,11 @@ a {
   font-size: 1rem;
   font-weight: normal;
   text-decoration: underline;
+}
+
+p {
+  margin-block-start: 1em;
+  margin-block-end: 1em;
 }
 
 button, p, a {
@@ -580,7 +587,11 @@ section.footer {
   }
 
   #Footer .related {
+    margin-top: 4rem;
     width: 100%;
+    h2 {
+      text-align: center;
+    }
   }
   .ClientDetails {
     position: absolute;
@@ -639,6 +650,14 @@ section.footer {
     // margin: 2px;
     height: 2px;
     background: white;
+  }
+}
+
+.related {
+  margin-top: 4rem;
+
+  h2 {
+    text-align: center;
   }
 }
 
